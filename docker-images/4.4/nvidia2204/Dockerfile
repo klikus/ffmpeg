@@ -6,7 +6,7 @@
 #
 #
 
-FROM nvcr.io/nvidia/cuda:12.3.1-devel-ubuntu22.04 AS devel-base
+FROM nvcr.io/nvidia/cuda:11.4.3-devel-ubuntu20.04 AS devel-base
 ENV	    NVIDIA_DRIVER_CAPABILITIES compute,utility,video
 ENV	    DEBIAN_FRONTEND=noninteractive
 WORKDIR     /tmp/workdir
@@ -16,7 +16,7 @@ RUN     apt-get -yqq update && \
         apt-get autoremove -y && \
         apt-get clean -y
 
-FROM  nvcr.io/nvidia/cuda:12.3.1-runtime-ubuntu22.04 AS runtime-base
+FROM  nvcr.io/nvidia/cuda:11.4.3-runtime-ubuntu20.04 AS runtime-base
 
 ENV	    NVIDIA_DRIVER_CAPABILITIES compute,utility,video
 ENV	    DEBIAN_FRONTEND=nonintercative
@@ -30,9 +30,9 @@ RUN     apt-get -yqq update && \
 
 FROM  devel-base as build
 
-ENV        NVIDIA_HEADERS_VERSION=11.1.5.3
+ENV        NVIDIA_HEADERS_VERSION=11.0.10.1
 
-ENV         FFMPEG_VERSION=4.4.5 \
+ENV         FFMPEG_VERSION=4.4.4 \
     AOM_VERSION=v3.8.1 \
     CHROMAPRINT_VERSION=1.5.0 \
     FDKAAC_VERSION=0.1.5 \
